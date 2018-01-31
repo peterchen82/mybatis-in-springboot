@@ -1,7 +1,7 @@
 # mybatis-in-springboot
 mybatis与springboot整合项目模板，包含了mybatis在springboot的常用用法。
 项目模板是一个高度工程化的样例，可直接在正式项目中使用。
-##特性
+## 特性
 * 完整的service和rest api测试用例
 * 测试用例覆盖率100%
 * 集成了redis缓存
