@@ -1,8 +1,0 @@
-com/github/peterchen82/mybatis/conf/RedisCacheConfig.class
-com/github/peterchen82/mybatis/conf/SwaggerConfig.class
-com/github/peterchen82/mybatis/mapper/ArtcleMapper.class
-com/github/peterchen82/mybatis/Application.class
-com/github/peterchen82/mybatis/service/ArtcleServiceProvider.class
-com/github/peterchen82/mybatis/service/ArtcleService.class
-com/github/peterchen82/mybatis/web/ArtcleController.class
-com/github/peterchen82/mybatis/entity/ArtcleEntity.class

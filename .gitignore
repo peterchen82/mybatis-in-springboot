@@ -1,3 +1,5 @@
+target
+target/*
 # IntelliJ project files
 .idea
 .idea/*
