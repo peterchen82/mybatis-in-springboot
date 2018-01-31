@@ -1,6 +1,0 @@
-spring:
-  profiles:
-    active: dev
-mybatis:
-  type-aliases-package: com.github.peterchen82.mybatis.entity
-  mapper-locations: "classpath:mapper/*.xml"
