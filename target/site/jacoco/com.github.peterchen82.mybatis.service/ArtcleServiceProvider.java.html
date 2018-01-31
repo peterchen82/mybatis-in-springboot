@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ArtcleServiceProvider.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">mybatis-in-springboot</a> &gt; <a href="index.source.html" class="el_package">com.github.peterchen82.mybatis.service</a> &gt; <span class="el_source">ArtcleServiceProvider.java</span></div><h1>ArtcleServiceProvider.java</h1><pre class="source lang-java linenums">package com.github.peterchen82.mybatis.service;
+
+import com.github.peterchen82.mybatis.entity.ArtcleEntity;
+import com.github.peterchen82.mybatis.mapper.ArtcleMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.Date;
+import java.util.List;
+
+
+@Service
+<span class="fc" id="L15">public class ArtcleServiceProvider implements ArtcleService {</span>
+
+<span class="fc" id="L17">    private final static Logger log = LoggerFactory.getLogger(ArtcleServiceProvider.class);</span>
+
+    @Autowired
+    private ArtcleMapper artcleMapper;
+
+    @Override
+    public List&lt;ArtcleEntity&gt; getArtcles(int start, int limit) {
+<span class="fc" id="L24">        long s = System.currentTimeMillis();</span>
+<span class="fc" id="L25">        List&lt;ArtcleEntity&gt; artcles = artcleMapper.getAll(start, limit);</span>
+<span class="fc" id="L26">        long e = System.currentTimeMillis();</span>
+<span class="fc" id="L27">        log.debug(&quot;耗时:&quot; + (e - s) + &quot;毫秒&quot;);</span>
+<span class="fc" id="L28">        log.debug(&quot;条数:&quot; + artcles.size());</span>
+<span class="fc" id="L29">        return artcles;</span>
+    }
+
+    @Override
+    public ArtcleEntity get(Long id) {
+<span class="fc" id="L34">        ArtcleEntity artcle = artcleMapper.getOne(id);</span>
+<span class="fc" id="L35">        return artcle;</span>
+    }
+
+    @Override
+    public ArtcleEntity save(ArtcleEntity artcleEntity) {
+<span class="fc bfc" id="L40" title="All 2 branches covered.">        if (artcleEntity.getId() != null) {</span>
+<span class="fc" id="L41">            artcleEntity.setId(null);</span>
+        }
+<span class="fc bfc" id="L43" title="All 2 branches covered.">        if (artcleEntity.getCreated() == null) {</span>
+<span class="fc" id="L44">            artcleEntity.setCreated(new Date());</span>
+        }
+<span class="fc" id="L46">        artcleMapper.insert(artcleEntity);</span>
+<span class="fc" id="L47">        return artcleEntity;</span>
+    }
+
+    @Override
+    public void saveMany(List&lt;ArtcleEntity&gt; artcles) {
+<span class="fc bfc" id="L52" title="All 4 branches covered.">        if (artcles == null || artcles.size() &lt;= 0) {</span>
+<span class="fc" id="L53">            return;</span>
+        }
+<span class="fc bfc" id="L55" title="All 2 branches covered.">        for (ArtcleEntity artcle : artcles) {</span>
+<span class="fc bfc" id="L56" title="All 2 branches covered.">            if (artcle.getId() != null) {</span>
+<span class="fc" id="L57">                artcle.setId(null);</span>
+            }
+<span class="fc bfc" id="L59" title="All 2 branches covered.">            if (artcle.getCreated() == null) {</span>
+<span class="fc" id="L60">                artcle.setCreated(new Date());</span>
+            }
+<span class="fc" id="L62">        }</span>
+<span class="fc" id="L63">        artcleMapper.insertMany(artcles);</span>
+
+<span class="fc" id="L65">    }</span>
+
+    @Override
+    public ArtcleEntity update(ArtcleEntity artcleEntity) {
+<span class="fc bfc" id="L69" title="All 4 branches covered.">        if (artcleEntity.getId() == null || artcleEntity.getId() &lt;= 0) {</span>
+<span class="fc" id="L70">            return null;</span>
+        }
+<span class="fc" id="L72">        artcleMapper.update(artcleEntity);</span>
+<span class="fc" id="L73">        return artcleEntity;</span>
+    }
+
+    @Override
+    public void delete(Long id) {
+<span class="fc bfc" id="L78" title="All 4 branches covered.">        if (id == null || id &lt;= 0) {</span>
+<span class="fc" id="L79">            return;</span>
+        }
+<span class="fc" id="L81">        artcleMapper.delete(id);</span>
+<span class="fc" id="L82">    }</span>
+
+    @Override
+    public void deleteAll() {
+<span class="fc" id="L86">        artcleMapper.deleteAll();</span>
+<span class="fc" id="L87">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>

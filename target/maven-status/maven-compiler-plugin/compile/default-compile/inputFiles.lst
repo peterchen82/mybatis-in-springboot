@@ -1,0 +1,8 @@
+/Users/jiechen/IdeaProjects/mybatis-in-springboot/src/main/java/com/github/peterchen82/mybatis/entity/ArtcleEntity.java
+/Users/jiechen/IdeaProjects/mybatis-in-springboot/src/main/java/com/github/peterchen82/mybatis/Application.java
+/Users/jiechen/IdeaProjects/mybatis-in-springboot/src/main/java/com/github/peterchen82/mybatis/conf/SwaggerConfig.java
+/Users/jiechen/IdeaProjects/mybatis-in-springboot/src/main/java/com/github/peterchen82/mybatis/mapper/ArtcleMapper.java
+/Users/jiechen/IdeaProjects/mybatis-in-springboot/src/main/java/com/github/peterchen82/mybatis/service/ArtcleServiceProvider.java
+/Users/jiechen/IdeaProjects/mybatis-in-springboot/src/main/java/com/github/peterchen82/mybatis/conf/RedisCacheConfig.java
+/Users/jiechen/IdeaProjects/mybatis-in-springboot/src/main/java/com/github/peterchen82/mybatis/web/ArtcleController.java
+/Users/jiechen/IdeaProjects/mybatis-in-springboot/src/main/java/com/github/peterchen82/mybatis/service/ArtcleService.java

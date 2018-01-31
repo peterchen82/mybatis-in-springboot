@@ -1,0 +1,6 @@
+spring:
+  profiles:
+    active: @profiles.active@
+mybatis:
+  type-aliases-package: com.github.peterchen82.mybatis.entity
+  mapper-locations: "classpath:mapper/*.xml"
