@@ -1,7 +1,7 @@
 package com.github.peterchen82.mybatis.web;
 
 
-import com.github.peterchen82.mybatis.entity.ArtcleEntity;
+import com.github.peterchen82.mybatis.entity.Artcle;
 import com.github.peterchen82.mybatis.service.ArtcleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -12,46 +12,50 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
+/**
+ * 文章的rest api实现
+ *
+ * @author peterchen
+ */
+
 @Api(value = "artcle", description = "账户文章的api")
 @RestController
 @RequestMapping(value = "/artcles")
-public class ArtcleController {
+public class ArtcleRestApi {
 
     @Autowired
     private ArtcleService artcleService;
 
     @ApiOperation(value = "获取文章列表", notes = "获取所有文章")
     @GetMapping("")
-    public List<ArtcleEntity> getArtcles(@RequestParam int start, @RequestParam int limit) {
-        List<ArtcleEntity> artcles = artcleService.getArtcles(start, limit);
-//        System.out.println("条数:"+artcles.size());
+    public List<Artcle> getArtcles(@RequestParam int start, @RequestParam int limit) {
+        List<Artcle> artcles = artcleService.getArtcles(start, limit);
         return artcles;
     }
 
     @ApiOperation(value = "获取文章详细信息", notes = "根据id来获取文章详细信息")
     @ApiImplicitParam(name = "id", paramType = "path", value = "文章ID", required = true)
     @GetMapping("/{id}")
-    public ArtcleEntity get(@PathVariable Long id) {
-        ArtcleEntity artcle = artcleService.get(id);
+    public Artcle get(@PathVariable Long id) {
+        Artcle artcle = artcleService.get(id);
         return artcle;
     }
 
     @ApiOperation(value = "创建文章", notes = "创建文章")
-    @ApiImplicitParam(name = "artcleEntity", value = "文章对象", required = true, dataTypeClass = ArtcleEntity.class)
+    @ApiImplicitParam(name = "artcle", value = "文章对象", required = true, dataTypeClass = Artcle.class)
     @PostMapping("")
-    public ArtcleEntity save(@RequestBody ArtcleEntity artcleEntity) {
-       return artcleService.save(artcleEntity);
+    public Artcle save(@RequestBody Artcle artcle) {
+       return artcleService.save(artcle);
     }
 
     @ApiOperation(value = "更新文章", notes = "更新文章")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "artcleEntity", value = "文章对象", required = true, dataTypeClass = ArtcleEntity.class)
+            @ApiImplicitParam(name = "artcle", value = "文章对象", required = true, dataTypeClass = Artcle.class)
     })
     @PutMapping
-    public void update(@RequestBody ArtcleEntity artcleEntity) {
-        System.out.println("=======");
-        System.out.println(artcleEntity);
-        artcleService.update(artcleEntity);
+    public void update(@RequestBody Artcle artcle) {
+        artcleService.update(artcle);
     }
 
     @ApiOperation(value = "删除文章", notes = "根据id来删除指定的文章")

@@ -6,6 +6,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+/**
+ * 项目启动入口类
+ *
+ * @author peterchen
+ */
 @SpringBootApplication
 @EnableTransactionManagement
 @MapperScan("com.github.peterchen82.mybatis.mapper")

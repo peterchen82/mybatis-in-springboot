@@ -1,7 +1,7 @@
 package com.github.peterchen82.mybatis;
 
 
-import com.github.peterchen82.mybatis.entity.ArtcleEntity;
+import com.github.peterchen82.mybatis.entity.Artcle;
 import com.github.peterchen82.mybatis.service.ArtcleService;
 import org.junit.Before;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * 文章单元测试基类
+ *
+ * @author peterchen
+ */
 public abstract class ArtcleBaseTest extends BaseTest{
 
     @Autowired
@@ -23,17 +27,17 @@ public abstract class ArtcleBaseTest extends BaseTest{
 
     protected void insertArtcles(int insertCount){
         if(insertCount<1) insertCount=1;
-        List<ArtcleEntity> artcles=new ArrayList();
+        List<Artcle> artcles=new ArrayList();
         for(int i=1;i<=insertCount;i++){
-            ArtcleEntity artcle=new ArtcleEntity();
+            Artcle artcle=new Artcle();
             artcle.setTitle("test-"+i);
             artcle.setContent("content-"+i);
             artcles.add(artcle);
         }
         artcleService.saveMany(artcles);
     }
-    protected ArtcleEntity insertOne(){
-        ArtcleEntity artcle=new ArtcleEntity();
+    protected Artcle insertOne(){
+        Artcle artcle=new Artcle();
         artcle.setTitle("test-one");
         artcle.setContent("content-one");
         return artcleService.save(artcle);

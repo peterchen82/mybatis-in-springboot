@@ -1,6 +1,6 @@
 package com.github.peterchen82.mybatis.service;
 
-import com.github.peterchen82.mybatis.entity.ArtcleEntity;
+import com.github.peterchen82.mybatis.entity.Artcle;
 import com.github.peterchen82.mybatis.mapper.ArtcleMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,19 +10,23 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.List;
 
-
+/**
+ * 文章服务的实现类
+ *
+ * @author peterchen
+ */
 @Service
-public class ArtcleServiceProvider implements ArtcleService {
+public class ArtcleServiceImpl implements ArtcleService {
 
-    private final static Logger log = LoggerFactory.getLogger(ArtcleServiceProvider.class);
+    private final static Logger log = LoggerFactory.getLogger(ArtcleServiceImpl.class);
 
     @Autowired
     private ArtcleMapper artcleMapper;
 
     @Override
-    public List<ArtcleEntity> getArtcles(int start, int limit) {
+    public List<Artcle> getArtcles(int start, int limit) {
         long s = System.currentTimeMillis();
-        List<ArtcleEntity> artcles = artcleMapper.getAll(start, limit);
+        List<Artcle> artcles = artcleMapper.list(start, limit);
         long e = System.currentTimeMillis();
         log.debug("耗时:" + (e - s) + "毫秒");
         log.debug("条数:" + artcles.size());
@@ -30,29 +34,29 @@ public class ArtcleServiceProvider implements ArtcleService {
     }
 
     @Override
-    public ArtcleEntity get(Long id) {
-        ArtcleEntity artcle = artcleMapper.getOne(id);
+    public Artcle get(Long id) {
+        Artcle artcle = artcleMapper.getById(id);
         return artcle;
     }
 
     @Override
-    public ArtcleEntity save(ArtcleEntity artcleEntity) {
-        if (artcleEntity.getId() != null) {
-            artcleEntity.setId(null);
+    public Artcle save(Artcle artcle) {
+        if (artcle.getId() != null) {
+            artcle.setId(null);
         }
-        if (artcleEntity.getCreated() == null) {
-            artcleEntity.setCreated(new Date());
+        if (artcle.getCreated() == null) {
+            artcle.setCreated(new Date());
         }
-        artcleMapper.insert(artcleEntity);
-        return artcleEntity;
+        artcleMapper.insert(artcle);
+        return artcle;
     }
 
     @Override
-    public void saveMany(List<ArtcleEntity> artcles) {
+    public void saveMany(List<Artcle> artcles) {
         if (artcles == null || artcles.size() <= 0) {
             return;
         }
-        for (ArtcleEntity artcle : artcles) {
+        for (Artcle artcle : artcles) {
             if (artcle.getId() != null) {
                 artcle.setId(null);
             }
@@ -65,12 +69,12 @@ public class ArtcleServiceProvider implements ArtcleService {
     }
 
     @Override
-    public ArtcleEntity update(ArtcleEntity artcleEntity) {
-        if (artcleEntity.getId() == null || artcleEntity.getId() <= 0) {
+    public Artcle update(Artcle artcle) {
+        if (artcle.getId() == null || artcle.getId() <= 0) {
             return null;
         }
-        artcleMapper.update(artcleEntity);
-        return artcleEntity;
+        artcleMapper.update(artcle);
+        return artcle;
     }
 
     @Override

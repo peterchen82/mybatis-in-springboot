@@ -1,7 +1,7 @@
 package com.github.peterchen82.mybatis.web;
 
 import com.github.peterchen82.mybatis.ArtcleBaseTest;
-import com.github.peterchen82.mybatis.entity.ArtcleEntity;
+import com.github.peterchen82.mybatis.entity.Artcle;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +15,11 @@ import java.util.Map;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+/**
+ * 文章rest api测试
+ *
+ * @author peterchen
+ */
 
 @RunWith(SpringRunner.class)
 public class ArtcleRestApiTest extends ArtcleBaseTest {
@@ -26,21 +31,21 @@ public class ArtcleRestApiTest extends ArtcleBaseTest {
         Map<String, Integer> params = new HashMap();
         params.put("start", 0);
         params.put("limit", 3);
-        List<ArtcleEntity> artclesPageOne = template.getForObject("/artcles?start={start}&limit={limit}", List.class, params);
+        List<Artcle> artclesPageOne = template.getForObject("/artcles?start={start}&limit={limit}", List.class, params);
         assertEquals(3, artclesPageOne.size());
         params.put("start", 3);
         params.put("limit", 20);
-        List<ArtcleEntity> artclesPageTwo = template.getForObject("/artcles?start={start}&limit={limit}", List.class, params);
+        List<Artcle> artclesPageTwo = template.getForObject("/artcles?start={start}&limit={limit}", List.class, params);
         assertEquals(7, artclesPageTwo.size());
     }
 
     @Test
     public void testGetOne() {
-        ArtcleEntity artcleSaved = insertOne();
+        Artcle artcleSaved = insertOne();
 
         Map<String, Long> params = new HashMap();
         params.put("id", artcleSaved.getId());
-        ArtcleEntity artcle = template.getForObject("/artcles/{id}", ArtcleEntity.class, params);
+        Artcle artcle = template.getForObject("/artcles/{id}", Artcle.class, params);
 
         assertEquals(Long.valueOf(artcleSaved.getId()), artcle.getId());
         assertEquals(artcleSaved.getTitle(), artcle.getTitle());
@@ -50,35 +55,35 @@ public class ArtcleRestApiTest extends ArtcleBaseTest {
 
     @Test
     public void testCreate() {
-        ArtcleEntity artcleVO=new ArtcleEntity();
+        Artcle artcleVO = new Artcle();
         artcleVO.setTitle("create-by-api");
         artcleVO.setContent("create-by-api");
-        ArtcleEntity artcleSaved=template.postForObject("/artcles",artcleVO,ArtcleEntity.class);
+        Artcle artcleSaved = template.postForObject("/artcles", artcleVO, Artcle.class);
 
         Map<String, Long> params = new HashMap();
         params.put("id", artcleSaved.getId());
-        ArtcleEntity artcle = template.getForObject("/artcles/{id}", ArtcleEntity.class, params);
+        Artcle artcle = template.getForObject("/artcles/{id}", Artcle.class, params);
 
         assertEquals(Long.valueOf(artcleSaved.getId()), artcle.getId());
         assertEquals(artcleSaved.getTitle(), artcle.getTitle());
         assertEquals(artcleSaved.getContent(), artcle.getContent());
         assertNotNull(artcle.getCreated());
 
-        List<ArtcleEntity> artcles = template.getForObject("/artcles?start=0&limit=20", List.class);
+        List<Artcle> artcles = template.getForObject("/artcles?start=0&limit=20", List.class);
         assertEquals(11, artcles.size());
     }
 
     @Test
     public void testUpdate() {
-        ArtcleEntity artcleSaved = insertOne();
-        ArtcleEntity artcle = template.getForObject("/artcles/"+artcleSaved.getId(), ArtcleEntity.class);
+        Artcle artcleSaved = insertOne();
+        Artcle artcle = template.getForObject("/artcles/" + artcleSaved.getId(), Artcle.class);
 
         artcle.setTitle("test-update");
         artcle.setContent("content-update");
 
-        template.put("/artcles",artcle);
+        template.put("/artcles", artcle);
 
-        ArtcleEntity artcleUpdated = template.getForObject("/artcles/"+artcle.getId(), ArtcleEntity.class);
+        Artcle artcleUpdated = template.getForObject("/artcles/" + artcle.getId(), Artcle.class);
 
         assertEquals(Long.valueOf(artcle.getId()), artcleUpdated.getId());
         assertEquals(artcle.getTitle(), artcleUpdated.getTitle());
@@ -87,22 +92,22 @@ public class ArtcleRestApiTest extends ArtcleBaseTest {
 
     @Test
     public void testDelete() {
-        ArtcleEntity artcleSaved = insertOne();
+        Artcle artcleSaved = insertOne();
 
         Map<String, Long> params = new HashMap();
         params.put("id", artcleSaved.getId());
-        ArtcleEntity artcle = template.getForObject("/artcles/{id}", ArtcleEntity.class, params);
+        Artcle artcle = template.getForObject("/artcles/{id}", Artcle.class, params);
 
         assertEquals(Long.valueOf(artcleSaved.getId()), artcle.getId());
         assertEquals(artcleSaved.getTitle(), artcle.getTitle());
         assertEquals(artcleSaved.getContent(), artcle.getContent());
         assertNotNull(artcle.getCreated());
 
-        List<ArtcleEntity> artcles = template.getForObject("/artcles?start=0&limit=20", List.class);
+        List<Artcle> artcles = template.getForObject("/artcles?start=0&limit=20", List.class);
         assertEquals(11, artcles.size());
 
-        template.delete("/artcles/"+artcle.getId());
-        List<ArtcleEntity> artclesDeleted = template.getForObject("/artcles?start=0&limit=20", List.class);
+        template.delete("/artcles/" + artcle.getId());
+        List<Artcle> artclesDeleted = template.getForObject("/artcles?start=0&limit=20", List.class);
         assertEquals(10, artclesDeleted.size());
 
 

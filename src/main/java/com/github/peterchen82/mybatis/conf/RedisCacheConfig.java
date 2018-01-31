@@ -6,16 +6,22 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.data.redis.cache.RedisCacheManager;
 
+/**
+ * redis配置
+ *
+ * @author peterchen
+ */
 @Configuration
 @EnableCaching
-@Profile({"dev","prod"})
+@Profile({"dev", "prod"})
 public class RedisCacheConfig {
     /**
      * 重新配置RedisCacheManager
+     *
      * @param rd
      */
     @Autowired
-    public void configRedisCacheManger(RedisCacheManager rd){
+    public void configRedisCacheManger(RedisCacheManager rd) {
         rd.setDefaultExpiration(100L);
     }
 }
