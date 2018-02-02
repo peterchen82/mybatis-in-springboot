@@ -18,7 +18,7 @@ public class RedisCacheConfig {
     /**
      * 重新配置RedisCacheManager
      *
-     * @param rd
+     * @param rd redisCahceManager实例
      */
     @Autowired
     public void configRedisCacheManger(RedisCacheManager rd) {

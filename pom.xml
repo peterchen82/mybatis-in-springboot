@@ -4,14 +4,29 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+
+    <name>mybatis-in-springboot</name>
+    <url>https://github.com/peterchen82/mybatis-in-springboot</url>
+    <description>mybatis与springboot整合项目模板，包含了mybatis在springboot的常用用法。 项目模板是一个高度工程化的样例，可直接在正式项目中使用。</description>
     <groupId>com.github.peterchen82</groupId>
     <artifactId>mybatis-in-springboot</artifactId>
     <version>1.0-SNAPSHOT</version>
-
-
-    <name>mybatis-in-springboot</name>
-    <description>mybatis-in-springboot demo project</description>
-
+    <organization>
+        <name>陈杰</name>
+        <url>https://github.com/peterchen82</url>
+    </organization>
+    <scm>
+        <connection>scm:https://github.com/peterchen82/mybatis-in-springboot.git</connection>
+        <url>https://github.com/peterchen82/mybatis-in-springboot</url>
+    </scm>
+    <developers>
+        <developer>
+            <id>peterchen</id>
+            <name>peterchen</name>
+            <email>peterchen82@vip.qq.com</email>
+            <timezone>8</timezone>
+        </developer>
+    </developers>
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -21,6 +36,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
     </properties>
 
@@ -129,6 +145,13 @@
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <configuration>
+                    <locales>zh_CN</locales>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-pmd-plugin</artifactId>
                 <version>3.8</version>
                 <configuration>
@@ -213,8 +236,35 @@
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jxr-plugin</artifactId>
+                <version>2.5</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-pmd-plugin</artifactId>
                 <version>3.8</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.10.4</version>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.0</version>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>report</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+                <configuration>
+                    <includes>
+                        com/github/peterchen82/mybatis/entity/**,com/github/peterchen82/mybatis/service/**,com/github/peterchen82/mybatis/web/**
+                    </includes>
+                </configuration>
             </plugin>
         </plugins>
     </reporting>

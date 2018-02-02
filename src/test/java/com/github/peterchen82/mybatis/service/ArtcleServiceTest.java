@@ -83,6 +83,7 @@ public class ArtcleServiceTest extends ArtcleBaseTest {
             assertNotNull(artcle);
             assertNotNull(artcle.getId());
             assertNotNull(artcle.getCreated());
+            assertNotNull(artcle.toString());
             assertTrue(artcle.getTitle().startsWith("test-"));
             assertTrue(artcle.getContent().startsWith("content-"));
         }
